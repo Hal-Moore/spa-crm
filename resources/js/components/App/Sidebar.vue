@@ -23,7 +23,7 @@ export default {
       { title: 'Аналитика', url: 'analytics' },
       { title: 'Планирование', url: 'planning' },
       { title: 'История', url: 'history' },
-      { title: 'Добавить заказ', url: 'record' },
+      { title: 'Добавить заказ', url: 'order' },
       { title: 'Ассортимен', url: 'categories' }
     ]
   })

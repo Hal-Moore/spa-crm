@@ -33,10 +33,10 @@ export default new Router({
       component: () => import('./views/Register.vue')
     },
     {
-      path: '/record',
-      name: 'record',
+      path: '/order',
+      name: 'order',
       meta: { layout: 'main' },
-      component: () => import('./views/Record.vue')
+      component: () => import('./views/Order.vue')
     },
     {
       path: '/profile',
@@ -67,6 +67,24 @@ export default new Router({
       name: 'analytics',
       meta: { layout: 'main' },
       component: () => import('./views/Analytics.vue')
-    }
+    },
+    {
+      path: '/add-category',
+      name: 'add-category',
+      meta: { layout: 'main' },
+      component: () => import('./views/Add-category.vue')
+    },
+    {
+      path: '/order-position',
+      name: 'order-position',
+      meta: { layout: 'main' },
+      component: () => import('./views/Order-position.vue')
+    },
+    {
+      path: '/add-category/new',
+      name: 'new',
+      meta: { layout: 'main' },
+      component: () => import('./views/New.vue')
+    },
   ]
 })

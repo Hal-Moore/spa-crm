@@ -56,6 +56,10 @@
         Нет аккаунта?
         <router-link to="/register">Зарегистрироваться</router-link>
       </p>
+      <p class="center">
+        Забыли пароль?
+        <a href="password/reset">Восстановить</a>
+      </p>
     </div>
   </form>
 </template>

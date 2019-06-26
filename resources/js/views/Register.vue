@@ -4,6 +4,21 @@
       <span class="card-title">CRM</span>
       <div class="input-field">
         <input
+            id="name"
+            type="text"
+            v-model.trim="name"
+            :class="{invalid: $v.name.$dirty && !$v.name.required}"
+        >
+        <label for="name">Имя</label>
+        <small
+          class="helper-text invalid"
+          v-if="$v.name.$dirty && !$v.name.required"
+        >
+          Введите ваше имя
+        </small>
+      </div>
+      <div class="input-field">
+        <input
             id="email"
             type="text"
             v-model.trim="email"
@@ -40,21 +55,7 @@
           Пароль должен быть {{$v.password.$params.minLength.min}} символов. Сейчас он {{password.length}}
         </small>
       </div>
-      <div class="input-field">
-        <input
-            id="name"
-            type="text"
-            v-model.trim="name"
-            :class="{invalid: $v.name.$dirty && !$v.name.required}"
-        >
-        <label for="name">Имя</label>
-        <small
-          class="helper-text invalid"
-          v-if="$v.name.$dirty && !$v.name.required"
-        >
-          Введите ваше имя
-        </small>
-      </div>
+      
       <p>
         <label>
           <input type="checkbox" v-model="agree" />
@@ -113,7 +114,7 @@ export default {
 
       console.log(formData)
 
-      this.$router.push('/')
+      //this.$router.push('/')
     }
   }
 }
