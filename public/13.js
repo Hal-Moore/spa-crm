@@ -41,7 +41,7 @@ var staticRenderFns = [
             attrs: { type: "submit" }
           },
           [
-            _vm._v("\r\n      Обновить\r\n      "),
+            _vm._v("\n      Обновить\n      "),
             _c("i", { staticClass: "material-icons right" }, [_vm._v("send")])
           ]
         )

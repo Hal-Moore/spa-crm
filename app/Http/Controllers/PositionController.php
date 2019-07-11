@@ -14,7 +14,7 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        return Position::all();
     }
 
     /**
@@ -35,7 +35,7 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Position::create($request->all());
     }
 
     /**

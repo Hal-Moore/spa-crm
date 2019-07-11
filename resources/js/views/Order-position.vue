@@ -24,9 +24,9 @@
         </thead>
 
         <tbody>
-        <tr>
-            <td>Coffee</td>
-            <td>200 руб.</td>
+        <tr v-for="post in positions" :key="post.id">
+            <td>{{post.name}}</td>
+            <td>{{post.price}}</td>
             <td>
                 <div class="input-field inline order-position-input">
                     <input type="number" value="1" min="1">
@@ -36,30 +36,7 @@
                 <button class="btn waves-effect wavers-light btn-small">Добавить</button>
             </td>
         </tr>
-        <tr>
-            <td>Coffee</td>
-            <td>200 руб.</td>
-            <td>
-                <div class="input-field inline order-position-input">
-                    <input type="number" value="1" min="1">
-                </div>
-            </td>
-            <td>
-                <button class="btn waves-effect wavers-light btn-small">Добавить</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Coffee</td>
-            <td>200 руб.</td>
-            <td>
-                <div class="input-field inline order-position-input">
-                    <input type="number" value="1" min="1">
-                </div>
-            </td>
-            <td>
-                <button class="btn waves-effect wavers-light btn-small">Добавить</button>
-            </td>
-        </tr>
+        
         </tbody>
     </table>
 
@@ -129,6 +106,20 @@
 <script>
 
 export default {
-    
+    data() {
+    return {
+      positions: [],
+      errors: []
+    }
+  },
+  created() {
+      axios.get('/position')
+      .then(response=>{
+          this.positions = response.data
+      })
+        .catch(e => {
+        this.errors.push(e)
+    }) 
+  },
 }
 </script>

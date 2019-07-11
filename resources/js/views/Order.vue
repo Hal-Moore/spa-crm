@@ -10,52 +10,39 @@
 
     <div class="frow order-row">
 
-        <router-link to="/order-position" class="card waves-effect pointer">
+        <router-link to="/order-position" v-for="post in categories" :key="post.id" class="card waves-effect pointer">
             <div class="center">
-                <img src="images/barm-02.jpg" class="responsive-img order-img">
+                <img :src="post.image" style="height: 200px;width: 300px;margin:10px" class="responsive-img order-img">
             </div>
             <div class="card-content center p10">
-                <h5 class="m0">Напитки</h5>
+                <h5 class="m0">{{post.name}}</h5>
             </div>
         </router-link>
 
-        <router-link to="/order-position" class="card waves-effect pointer">
-            <div class="center">
-                <img src="images/barm-02.jpg" class="responsive-img order-img">
-            </div>
-            <div class="card-content center p10">
-                <h5 class="m0">Напитки</h5>
-            </div>
-        </router-link>
-
-        <router-link to="/order-position" class="card waves-effect pointer">
-            <div class="center">
-                <img src="images/barm-02.jpg" class="responsive-img order-img">
-            </div>
-            <div class="card-content center p10">
-                <h5 class="m0">Напитки</h5>
-            </div>
-        </router-link>
-
-        <router-link to="/order-position" class="card waves-effect pointer">
-            <div class="center">
-                <img src="images/barm-02.jpg" class="responsive-img order-img">
-            </div>
-            <div class="card-content center p10">
-                <h5 class="m0">Напитки</h5>
-            </div>
-        </router-link>
-
-        <router-link to="/order-position" class="card waves-effect pointer">
-            <div class="center">
-                <img src="images/barm-02.jpg" class="responsive-img order-img">
-            </div>
-            <div class="card-content center p10">
-                <h5 class="m0">Напитки</h5>
-            </div>
-        </router-link>
 
     </div>
 
 </main>
 </template>
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      categories: [],
+      errors: []
+    }
+  },
+  created() {
+      axios.get('/categories')
+      .then(response=>{
+          this.categories = response.data
+      })
+        .catch(e => {
+        this.errors.push(e)
+    }) 
+  },
+}
+
+</script>

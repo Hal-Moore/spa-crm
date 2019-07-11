@@ -20,11 +20,10 @@ export default {
   data: () => ({
     links: [
       { title: 'Обзор', url: '/', exact: 'true' },
-      { title: 'Аналитика', url: 'analytics' },
-      { title: 'Планирование', url: 'planning' },
-      { title: 'История', url: 'history' },
-      { title: 'Добавить заказ', url: 'order' },
-      { title: 'Ассортимен', url: 'categories' }
+      { title: 'Аналитика', url: '/analytics' },
+      { title: 'История', url: '/history' },
+      { title: 'Добавить заказ', url: '/order' },
+      { title: 'Ассортимент', url: '/category' }
     ]
   })
 }

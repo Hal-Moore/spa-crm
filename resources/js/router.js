@@ -14,23 +14,11 @@ export default new Router({
       meta: { layout: 'main' },
       component: () => import('./views/Home.vue')
     },
-    {
-      path: '/login',
-      name: 'login',
-      meta: { layout: 'empty' },
-      component: () => import('./views/Login.vue')
-    },
-    {
-      path: '/categories',
-      name: 'categories',
+       {
+      path: '/category',
+      name: 'category',
       meta: { layout: 'main' },
       component: () => import('./views/Categories.vue')
-    },
-    {
-      path: '/register',
-      name: 'register',
-      meta: { layout: 'empty' },
-      component: () => import('./views/Register.vue')
     },
     {
       path: '/order',
@@ -43,12 +31,6 @@ export default new Router({
       name: 'profile',
       meta: { layout: 'main' },
       component: () => import('./views/Profile.vue')
-    },
-    {
-      path: '/planning',
-      name: 'planning',
-      meta: { layout: 'main' },
-      component: () => import('./views/Planning.vue')
     },
     {
       path: '/history',
@@ -69,8 +51,8 @@ export default new Router({
       component: () => import('./views/Analytics.vue')
     },
     {
-      path: '/add-category',
-      name: 'add-category',
+      path: '/add-categori/:id',
+      name: 'edit-category',
       meta: { layout: 'main' },
       component: () => import('./views/Add-category.vue')
     },
@@ -81,10 +63,11 @@ export default new Router({
       component: () => import('./views/Order-position.vue')
     },
     {
-      path: '/add-category/new',
+      path: '/new',
       name: 'new',
       meta: { layout: 'main' },
       component: () => import('./views/New.vue')
     },
+    
   ]
 })

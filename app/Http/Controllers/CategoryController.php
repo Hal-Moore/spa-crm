@@ -14,8 +14,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Post::all();
+         return Category::all();
     }
+
+    // public function getCategory (Request $request, Category $category, $id) 
+    // {
+    //     return Category::find($id);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +39,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         return Category::create($request->all());
     }
 
@@ -55,9 +60,9 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Category $category,$id)
     {
-        //
+        return Category::findOrFail($id);
     }
 
     /**
@@ -67,9 +72,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request,Category $category,$id)
     {
-        //
+        $category=Category::findOrFail($id);
+        $category->update($request->all());
+        return $category;
     }
 
     /**
@@ -78,8 +85,8 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, $id)
     {
-        //
+        Category::destroy($id);
     }
 }

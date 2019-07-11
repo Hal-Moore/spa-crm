@@ -17,10 +17,6 @@
       <HomeOrders />
       <div class="page-title"></div>
       <HomeBill />
-      <HomeCurrency 
-        :rates="currency.rates"
-        :date="currency.date"
-      />
     
     </div>
 </div>
@@ -28,7 +24,6 @@
 
 <script>
 import HomeBill from '@/components/HomeBill'
-import HomeCurrency from '@/components/HomeCurrency'
 import HomeIncome from '@/components/HomeIncome'
 import HomeOrders from '@/components/HomeOrders'
 
@@ -36,7 +31,6 @@ export default {
   name: 'home',
   data: () => ({
     loading: true,
-    currency: null
   }),
   async mounted() {
     this.currency=await this.$store.dispatch('fetchCurrency')
@@ -45,7 +39,7 @@ export default {
   },
   components: {
     HomeIncome, HomeOrders,
-    HomeBill, HomeCurrency
+    HomeBill
   }
 }
 </script>
