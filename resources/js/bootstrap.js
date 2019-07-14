@@ -1,4 +1,7 @@
-
+import axios from 'axios';
+import Vue from 'vue';
+import Vuex from 'vuex';
+window.Vuex=Vuex;
 window._ = require('lodash');
 
 /**
@@ -38,6 +41,7 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+window.Vue=Vue;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

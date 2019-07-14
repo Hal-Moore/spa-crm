@@ -16,7 +16,7 @@
         
             <div class="col s12 l3">
                 <div class="input-field ">
-                    <input id="name" type="text" v-model="posts.name">
+                    <input id="name" autofocus type="text" v-model="posts.name">
                     <label for="name">Название</label>
                     <div class="file-field input-field">
                         <div class="btn">
@@ -46,39 +46,53 @@
                     <button @click="removeImage" class="btn">Удалить изображение</button>
                 </div>
             </div> 
-        
+    </div>
+    </form>
         <div class="row">
             <div class="col s12">
+                <form v-on:submit.prevent="submitAddPosition()">
                 <div class="page-subtitle block='true'">
                     <h4>Позиции:</h4>
-                    <div class="right">
-                      <EditAddModal></EditAddModal>
+                    <div class="input-field col s3 l3">
+                      <input id="name" type="text" v-model="posit.namepost" >
+                      <label for="name">Название</label>
                     </div>
+                    <div class="input-field col s3 l3">
+                      <input id="names" type="number" v-model="posit.price">
+                      <label for="name">Цена</label>
+                    </div>
+                    <div class="input-field col s3 l3">
+                      <button class="waves-effect waves-light btn">
+                        Добавить позицию
+                      </button>
+                    </div>
+                    <div class="input-field col s3 l3">
+                      <input id="namer" type="hidden" v-model="posit.c_id" >
+                    </div>
+                    
                 </div>
-
-                <div class="collection col s12">
-                    <router-link class="collection-item collection-item-icon">
+                </form>
+                
+                <!-- <div v-for="posit in position" :key="posit.id" class="collection col s12">
+                    <router-link :to="{name: 'edit-category', params:{id:posit.id}}" class="collection-item collection-item-icon">
                         <span>
-                            Кофе <strong>20 руб.</strong>
+                            {{posit.namepost}} <strong>{{posit.price}}</strong>
                         </span>
                         <span>
                             <i class="material-icons right">delete</i>
                         </span>
                     </router-link>
-                </div>
+
+                </div> -->
+                
             </div>
         </div>
-        <div class="left" style="margin-left:65px">
-          
-        </div>
-    </div>
-    </form>
+    
 </main>
 </template>
         
 <script>
 import axios from 'axios';
-import EditAddModal from '@/views/EditAddModal'
 export default {
   data: function() {
     return {
@@ -86,14 +100,19 @@ export default {
           name:'',
           image:'',
       },
+      posit:{
+        namepost:'',
+        price:'',
+        category_id:'',
+      },
+      position: [],
+      categories: [],
       errors: []
     }
   },
-  components:{
-    EditAddModal
-  },
   created(){
       let id=this.$route.params.id;
+      let c_id=this.posit.category_id=id;
       axios.get('/get-category/' + id)
       .then(response=>{
           this.posts=response.data
@@ -105,7 +124,7 @@ export default {
   methods:{
   submitUpdateCategory() {
     let id=this.$route.params.id;
-    axios.post(`/update-category/`  + id, this.posts)
+    axios.post('/update-category/'  + id, this.posts)
     .then(response => {
         this.$router.push({path:'/category'})
       this.posts = response.data
@@ -114,9 +133,20 @@ export default {
       this.errors.push(e)
     }) 
   },
+  submitAddPosition(){
+    axios.post('/position', this.posit)
+    .then(response => {
+        console.log(response)
+        this.$router.push({path:'/category'})
+      this.posit = response.data
+    })
+    .catch(e => {
+      this.errors.push(e)
+    }) 
+  },
   submitCategoryDelete() {
       if(confirm("Click 'Ok' to delete.")){
-    axios.delete('/get-category/' +id)
+    axios.delete('/get-category/' +id, this.posts)
     .then(response => {
         console.log(response)
         this.$router.push({path:'/'})

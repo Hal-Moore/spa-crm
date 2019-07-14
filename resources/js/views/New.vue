@@ -28,7 +28,7 @@
                             <input class="file-path validate" type="text">
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div>
@@ -40,28 +40,25 @@
             <div class="col s12 l3 center">
                 <div v-if="!posts.image">
                     <img src="/images/No_image.png" style="height: 200px"/>
-                
+
                 </div>
                 <div v-else>
                     <img :src="posts.image" style="height: 200px"/>
                     <button @click="removeImage" class="btn">Удалить изображение</button>
                 </div>
-            </div> 
+            </div>
         </form>
-        <div class="left" style="margin-left:65px">
-          <EditAddModal></EditAddModal>
-        </div>
-        
 
 
-        
+
+
     </div>
 </main>
 </template>
 
 <script>
+import { email, required, minLength } from 'vuelidate/lib/validators'
 import axios from 'axios';
-import EditAddModal from '@/views/EditAddModal'
 export default {
   data: function() {
     return {
@@ -71,9 +68,6 @@ export default {
       },
       errors: []
     }
-  },
-  components:{
-    EditAddModal
   },
   methods:{
   submitCategory() {
@@ -85,7 +79,7 @@ export default {
     })
     .catch(e => {
       this.errors.push(e)
-    }) 
+    })
   },
   onFileChange(e) {
     var files = e.target.files || e.dataTransfer.files;
@@ -110,6 +104,6 @@ export default {
 
   }
 }
- 
+
  </script>
 

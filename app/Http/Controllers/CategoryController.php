@@ -87,6 +87,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category, $id)
     {
-        Category::destroy($id);
+        $category=Category::findOrFail($id);
+        $category->delete($request->all());
+        return $category;
     }
 }

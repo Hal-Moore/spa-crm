@@ -7,9 +7,9 @@
             <i class="material-icons">keyboard_arrow_right</i>
             Добавить продукцию
         </h4>
-        <button class="waves-effect btn grey darken-1 modal-trigger" data-target="explore-order">
-            Завершить
-        </button>
+        <router-link to="/cart" class="waves-effect btn grey darken-1 modal-trigger" data-target="explore-order">
+            Корзина заказов {{ $store.state.cartCount }}
+        </router-link>
     </div>
 
 
@@ -24,16 +24,17 @@
         </thead>
 
         <tbody>
-        <tr v-for="post in positions" :key="post.id">
-            <td>{{post.name}}</td>
-            <td>{{post.price}}</td>
+        <tr v-for="posit in position" :key="posit.id">
+            <td>{{posit.namepost}}</td>
+            <td>{{posit.price.toFixed(2)}}</td>
             <td>
                 <div class="input-field inline order-position-input">
                     <input type="number" value="1" min="1">
                 </div>
             </td>
             <td>
-                <button class="btn waves-effect wavers-light btn-small">Добавить</button>
+                <button class="button is-success"
+        @click="addToCart(posit)">Добавить в заказ</button>
             </td>
         </tr>
         
@@ -104,18 +105,18 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
     data() {
     return {
-      positions: [],
+      position: [],
       errors: []
     }
   },
   created() {
       axios.get('/position')
       .then(response=>{
-          this.positions = response.data
+          this.position = response.data
       })
         .catch(e => {
         this.errors.push(e)

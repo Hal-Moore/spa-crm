@@ -99,3 +99,9 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  p {
+margin-top: 20px;
+
+}
+</style>

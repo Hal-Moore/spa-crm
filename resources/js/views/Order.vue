@@ -2,9 +2,9 @@
     <main class="content">
     <div class="page-title">
         <h4>Заказ</h4>
-        <button class="waves-effect btn grey darken-1 modal-trigger" data-target="explore-order">
-            Завершить
-        </button>
+        <router-link to="/cart" class="waves-effect btn grey darken-1 modal-trigger" data-target="explore-order">
+            Корзина заказов
+        </router-link>
     </div>
 
 
