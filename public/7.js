@@ -117,22 +117,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      posit: {
+        namepost: '',
+        price: '',
+        category_id: ''
+      },
       position: [],
+      categories: [],
       errors: []
     };
   },
   created: function created() {
     var _this = this;
 
+    var id = this.$route.params.id;
+    var c_id = this.posit.category_id = id;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/position').then(function (response) {
       _this.position = response.data;
     })["catch"](function (e) {
       _this.errors.push(e);
     });
+  },
+  methods: {
+    addToCart: function addToCart(posit) {
+      this.$store.commit('addToCart', posit);
+    }
   }
 });
 
@@ -159,12 +173,23 @@ var render = function() {
         "div",
         { staticClass: "page-title" },
         [
-          _vm._m(0),
+          _c(
+            "h4",
+            [
+              _c("router-link", { attrs: { to: "/order" } }, [_vm._v("Заказ")]),
+              _vm._v(" "),
+              _c("i", { staticClass: "material-icons" }, [
+                _vm._v("keyboard_arrow_right")
+              ]),
+              _vm._v("\n            Добавить продукцию\n        ")
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "router-link",
             {
-              staticClass: "waves-effect btn grey darken-1 modal-trigger",
+              staticClass: "waves-effect waves-light btn",
               attrs: { to: "/cart", "data-target": "explore-order" }
             },
             [
@@ -179,59 +204,49 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("table", { staticClass: "highlight" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.position, function(posit) {
-            return _c("tr", { key: posit.id }, [
-              _c("td", [_vm._v(_vm._s(posit.namepost))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(posit.price.toFixed(2)))]),
-              _vm._v(" "),
-              _vm._m(2, true),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "button is-success",
-                    on: {
-                      click: function($event) {
-                        return _vm.addToCart(posit)
+      _c("form", { staticClass: "col s12 l12" }, [
+        _c("table", { staticClass: "highlight" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.position, function(posit) {
+              return _c("tr", { key: posit.id }, [
+                _c("td", [_vm._v(_vm._s(posit.namepost))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(posit.price.toFixed(2)))]),
+                _vm._v(" "),
+                _vm._m(1, true),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "waves-effect waves-light btn",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.addToCart(posit)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Добавить в заказ")]
-                )
+                    },
+                    [_vm._v("\n                Добавить в заказ")]
+                  )
+                ])
               ])
-            ])
-          }),
-          0
-        )
+            }),
+            0
+          )
+        ])
       ])
     ]),
     _vm._v(" "),
-    _vm._m(3),
+    _vm._m(2),
     _vm._v(" "),
-    _vm._m(4)
+    _vm._m(3)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h4", [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Заказ")]),
-      _vm._v(" "),
-      _c("i", { staticClass: "material-icons" }, [
-        _vm._v("keyboard_arrow_right")
-      ]),
-      _vm._v("\n            Добавить продукцию\n        ")
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

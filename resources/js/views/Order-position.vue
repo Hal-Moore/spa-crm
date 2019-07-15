@@ -3,16 +3,16 @@
     <main class="content">
     <div class="page-title">
         <h4>
-            <a href="#">Заказ</a>
+            <router-link to="/order">Заказ</router-link>
             <i class="material-icons">keyboard_arrow_right</i>
             Добавить продукцию
         </h4>
-        <router-link to="/cart" class="waves-effect btn grey darken-1 modal-trigger" data-target="explore-order">
+        <router-link to="/cart" class="waves-effect waves-light btn" data-target="explore-order">
             Корзина заказов {{ $store.state.cartCount }}
         </router-link>
     </div>
 
-
+    <form  class="col s12 l12">
     <table class="highlight">
         <thead>
         <tr>
@@ -33,13 +33,14 @@
                 </div>
             </td>
             <td>
-                <button class="button is-success"
-        @click="addToCart(posit)">Добавить в заказ</button>
+                <button @click.prevent="addToCart(posit)" class="waves-effect waves-light btn">
+                Добавить в заказ</button>
             </td>
         </tr>
-        
+
         </tbody>
     </table>
+    </form>
 
 </main>
 
@@ -109,18 +110,31 @@ import axios from 'axios';
 export default {
     data() {
     return {
+      posit:{
+        namepost:'',
+        price:'',
+        category_id:'',
+      },
       position: [],
+      categories: [],
       errors: []
     }
   },
   created() {
+     let id=this.$route.params.id;
+      let c_id=this.posit.category_id=id;
       axios.get('/position')
       .then(response=>{
           this.position = response.data
       })
         .catch(e => {
         this.errors.push(e)
-    }) 
+    })
   },
+  methods: {
+    addToCart(posit) {
+        this.$store.commit('addToCart', posit);
+    }
+}
 }
 </script>

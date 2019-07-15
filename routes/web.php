@@ -14,8 +14,7 @@ Route::resource('/categories','CategoryController');
 Route::get('/get-category/{id}','CategoryController@store');
 Route::get('/get-category/{id}','CategoryController@edit');
 Route::post('/update-category/{id}','CategoryController@update');
-Route::delete('/get-category/{id}','CategoryController@destroy');
 Route::resource('/position','PositionController');
 Route::post('/position/{id}','PositionController@store');
-
+Route::resource('/add-order','OrderController');
 Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');

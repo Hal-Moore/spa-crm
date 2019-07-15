@@ -1,43 +1,88 @@
 <template>
-    <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="">
-            Корзина ({{ $store.state.cartCount }})
-        </a>
+    <table class="highlight">
 
-        <div v-if="$store.state.cart.length > 0" class="navbar-dropdown is-boxed is-right">
-            <a v-for="posit in $store.state.cart"
-                :key="posit.id"
-                class="navbar-item"
-                href=""
-            >
-                {{ posit.title }} x{{ posit.quantity }} - ${{ posit.totalPrice }}
-            </a>
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
+        </tr>
+        </thead>
 
-            <a class="navbar-item" href="">
-                Итого: ${{ totalPrice }}
-            </a>
+        <tbody>
+        <tr v-for="posit in $store.state.cart"
+          :key="posit.id"
+          class="navbar-item"
+            href="">
 
-            <hr class="navbar-divider">
+          <td>{{ posit.namepost }}</td>
+          <td>{{ posit.quantity }}</td>
+          <td>{{ posit.totalPrice.toFixed(2) }}</td>
+          <button class="removeBtn"
+            title="Удалить из корзины"
+            @click.prevent="removeFromCart(posit)">
+            <i class="material-icons">delete</i>
+          </button>
+        </tr>
+        <button @click.prevent="addOrder()" class="navbar-item btn">
+           Итого: {{ totalPrice }}
+        </button>
 
-            <a class="navbar-item" href="">
-                К оплате
-            </a>
-        </div>
+        </tbody>
+    </table>
 
-        <div v-else class="navbar-dropdown is-boxed is-right">
-            <a class="navbar-item" href="">
-                Корзина пуста
-            </a>
-        </div>
-    </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-    methods: {
-    addToCart(posit) {
-        this.$store.commit('addToCart', posit);
+
+  data: function() {
+    return {
+      posit: {
+          namepost:'',
+          quantity:'',
+          totalPrice:'',
+      },
+      errors: []
     }
-}
+  },
+  methods: {
+    addOrder() {
+      let data1 = {cart: JSON.stringify(this.$store.state.cart)}
+      axios.post(`/add-order`, data1)
+      .then(response => {
+        this.$router.push({path:'/order'})
+      this.posit = response.data
+      })
+      .catch(e => {
+      this.errors.push(e)
+      })
+    },
+    removeFromCart(posit) {
+        this.$store.commit('removeFromCart', posit);
+    },
+  },
+    computed: {
+    totalPrice() {
+        let total = 0;
+
+        for (let item of this.$store.state.cart) {
+            total += item.totalPrice;
+        }
+
+        return total.toFixed(2);
+    }
+  }
 }
 </script>
+<style>
+.removeBtn {
+    margin-right: 1rem;
+    margin-top: 1rem;
+    color: red;
+}
+.btn {
+  margin-top: 1rem;
+}
+</style>

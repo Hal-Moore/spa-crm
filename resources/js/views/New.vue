@@ -57,7 +57,6 @@
 </template>
 
 <script>
-import { email, required, minLength } from 'vuelidate/lib/validators'
 import axios from 'axios';
 export default {
   data: function() {

@@ -14,6 +14,7 @@ class PositionController extends Controller
      */
     public function index()
     {
+        // return Position::where('id', $id)->get();
         return Position::all();
     }
 
@@ -46,7 +47,8 @@ class PositionController extends Controller
      */
     public function show(Position $position)
     {
-        //
+        //id, $id
+        // category_id, $id
     }
 
     /**

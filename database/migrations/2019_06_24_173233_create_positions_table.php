@@ -17,7 +17,7 @@ class CreatePositionsTable extends Migration
             $table->increments('id');
             $table->string('namepost');
             $table->integer('price');
-            $table->integer('id_category');
+            $table->integer('category_id');
             $table->timestamps();
         });
     }

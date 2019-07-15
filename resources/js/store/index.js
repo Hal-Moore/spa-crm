@@ -1,18 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+let cart = window.localStorage.getItem('cart');
+let cartCount = window.localStorage.getItem('cartCount');
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+
   state: {
-    cart: [],
-    cartCount: 0,
+    cart: cart ? JSON.parse(cart) : [],
+    cartCount: cartCount ? parseInt(cartCount) : 0,
   },
   mutations: {
     addToCart(state, posit) {
       let found = state.cart.find(product => product.id == posit.id);
 
-    if (found) {
+      if (found) {
         found.quantity ++;
         found.totalPrice = found.quantity * found.price;
     } else {
@@ -23,8 +25,23 @@ export default new Vuex.Store({
     }
 
     state.cartCount++;
-  }
+    this.commit('saveCart');
+    },
+    removeFromCart(state, posit) {
+    let index = state.cart.indexOf(posit);
+
+    if (index > -1) {
+        let product = state.cart[index];
+        state.cartCount -= product.quantity;
+        state.cart.splice(index, 1);
+    }
+    this.commit('saveCart');
   },
+  saveCart(state) {
+    window.localStorage.setItem('cart', JSON.stringify(state.cart));
+    window.localStorage.setItem('cartCount', state.cartCount);
+}
+},
   actions: {
     async fetchCurrency(){
       const key = process.env.VUE_APP_FIXER

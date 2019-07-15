@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+      return Category::all();
     }
 
     /**
@@ -35,7 +35,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $cart = json_decode(request('cart'));
     }
 
     /**

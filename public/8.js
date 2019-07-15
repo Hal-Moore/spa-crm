@@ -83,10 +83,16 @@ var render = function() {
         _c(
           "router-link",
           {
-            staticClass: "waves-effect btn grey darken-1 modal-trigger",
+            staticClass: "waves-effect btn",
             attrs: { to: "/cart", "data-target": "explore-order" }
           },
-          [_vm._v("\n            Корзина заказов\n        ")]
+          [
+            _vm._v(
+              "\n            Корзина заказов " +
+                _vm._s(_vm.$store.state.cartCount) +
+                "\n        "
+            )
+          ]
         )
       ],
       1
@@ -101,7 +107,7 @@ var render = function() {
           {
             key: post.id,
             staticClass: "card waves-effect pointer",
-            attrs: { to: "/order-position" }
+            attrs: { to: { name: "order-position", params: { id: post.id } } }
           },
           [
             _c("div", { staticClass: "center" }, [

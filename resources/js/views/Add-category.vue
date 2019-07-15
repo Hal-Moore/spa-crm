@@ -3,17 +3,17 @@
     <form v-on:submit.prevent="submitUpdateCategory()" class="col s12 l12">
     <div class="page-title">
         <h4>
-            <router-link to="/categories">Категории</router-link>
+            <router-link to="/category">Категории</router-link>
             <i class="material-icons">keyboard_arrow_right</i>
             Редактировать категорию
         </h4>
         <button class="btn btn-small red right col s1 l1" v-on:click="submitCategoryDelete()">
-                    <i class="material-icons">delete</i>
+            <i class="material-icons">delete</i>
         </button>
     </div>
 
     <div class="row">
-        
+
             <div class="col s12 l3">
                 <div class="input-field ">
                     <input id="name" autofocus type="text" v-model="posts.name">
@@ -27,7 +27,7 @@
                             <input class="file-path validate" type="text">
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div>
@@ -39,13 +39,13 @@
             <div class="col s12 l3 center">
                 <div v-if="!posts.image">
                     <img src="/images/No_image.png" style="height: 200px"/>
-                
+
                 </div>
                 <div v-else>
                     <img :src="posts.image" style="height: 200px"/>
                     <button @click="removeImage" class="btn">Удалить изображение</button>
                 </div>
-            </div> 
+            </div>
     </div>
     </form>
         <div class="row">
@@ -69,11 +69,11 @@
                     <div class="input-field col s3 l3">
                       <input id="namer" type="hidden" v-model="posit.c_id" >
                     </div>
-                    
+
                 </div>
                 </form>
-                
-                <!-- <div v-for="posit in position" :key="posit.id" class="collection col s12">
+
+                <div v-for="posit in position" :key="posit.id" class="collection col s12">
                     <router-link :to="{name: 'edit-category', params:{id:posit.id}}" class="collection-item collection-item-icon">
                         <span>
                             {{posit.namepost}} <strong>{{posit.price}}</strong>
@@ -83,14 +83,14 @@
                         </span>
                     </router-link>
 
-                </div> -->
-                
+                </div>
+
             </div>
         </div>
-    
+
 </main>
 </template>
-        
+
 <script>
 import axios from 'axios';
 export default {
@@ -131,7 +131,7 @@ export default {
     })
     .catch(e => {
       this.errors.push(e)
-    }) 
+    })
   },
   submitAddPosition(){
     axios.post('/position', this.posit)
@@ -142,18 +142,19 @@ export default {
     })
     .catch(e => {
       this.errors.push(e)
-    }) 
+    })
   },
   submitCategoryDelete() {
+      let id=this.$route.params.id;
       if(confirm("Click 'Ok' to delete.")){
-    axios.delete('/get-category/' +id, this.posts)
+    axios.delete('/categories/' + id)
     .then(response => {
         console.log(response)
         this.$router.push({path:'/'})
     })
     .catch(e => {
       this.errors.push(e)
-    }) 
+    })
     }
   },
     onFileChange(e) {

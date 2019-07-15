@@ -2,15 +2,15 @@
     <main class="content">
     <div class="page-title">
         <h4>Заказ</h4>
-        <router-link to="/cart" class="waves-effect btn grey darken-1 modal-trigger" data-target="explore-order">
-            Корзина заказов
+        <router-link to="/cart" class="waves-effect btn" data-target="explore-order">
+            Корзина заказов {{ $store.state.cartCount }}
         </router-link>
     </div>
 
 
     <div class="frow order-row">
 
-        <router-link to="/order-position" v-for="post in categories" :key="post.id" class="card waves-effect pointer">
+        <router-link :to="{name: 'order-position', params:{id:post.id}}" v-for="post in categories" :key="post.id" class="card waves-effect pointer">
             <div class="center">
                 <img :src="post.image" style="height: 200px;width: 300px;margin:10px" class="responsive-img order-img">
             </div>
@@ -41,7 +41,7 @@ export default {
       })
         .catch(e => {
         this.errors.push(e)
-    }) 
+    })
   },
 }
 
